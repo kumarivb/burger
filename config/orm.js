@@ -38,7 +38,7 @@ function printQuestionMarks(num) {
 
 // methods to retrieve and store data in the database; select all, insert one, update one
 var orm = {
-    select: function(tableInput, cb) {
+    selectAll: function(tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function(err, result) {
             if (err) {
@@ -48,7 +48,7 @@ var orm = {
             cb(result);
         });
     },
-    insert: function(table, cols, vals, cb) {
+    insertOne: function(table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
 
         queryString += " (";
@@ -68,7 +68,7 @@ var orm = {
             cb(result);
         });
     },
-    update: function(table, objColVals, condition, cb) {
+    updateOne: function(table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
 
         queryString += " SET ";
