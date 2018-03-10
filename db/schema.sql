@@ -1,8 +1,10 @@
+DROP DATABASE IF EXISTS burgers_db;
+
 CREATE DATABASE burgers_db;
 USE burgers_db;
 
 CREATE TABLE burgers (
-	id Int(150) AUTO_INCREMENT NOT NULL,
+	id INT(150) AUTO_INCREMENT NOT NULL,
 	burgerName VARCHAR(255) NOT NULL,
 	devoured BOOLEAN DEFAULT false,
 

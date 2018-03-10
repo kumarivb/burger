@@ -1,5 +1,5 @@
 // import mysql connection
-var connection = require("../config/connection.js");
+var connection = require("./connection.js");
 
 // helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
 // ["?", "?", "?"].toString() => "?,?,?";
@@ -11,7 +11,7 @@ function printQuestionMarks(num) {
     }
   
     return arr.toString();
-  }
+  };
   
   // Helper function to convert object key/value pairs to SQL syntax
   function objToSql(ob) {
@@ -34,13 +34,12 @@ function printQuestionMarks(num) {
   
     // translate array of strings to a single comma-separated string
     return arr.toString();
-  }
+  };
 
 // methods to retrieve and store data in the database; select all, insert one, update one
 var orm = {
     selectAll: function(tableInput, cb) {
-        var queryString = "SELECT * FROM " + tableInput + ";";
-        connection.query(queryString, function(err, result) {
+        connection.query("SELECT * FROM ??;", [tableInput], function(err, result) {
             if (err) {
                 throw err;
             }
@@ -49,18 +48,7 @@ var orm = {
         });
     },
     insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + table;
-
-        queryString += " (";
-        queryString += cols.toString();
-        queryString += ") ";
-        queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
-
-        console.log(queryString);
-
-        connection.query(queryString, vals, function(err, result) {
+        connection.query("INSERT INTO ?? (??) VALUES (?);", [table, cols, vals], function(err, result) {
             if (err) {
                 throw err;
             }
@@ -68,22 +56,13 @@ var orm = {
             cb(result);
         });
     },
-    updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + table;
-
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
-
-        console.log(queryString);
-
-        connection.query(queryString, function(err, result) {
-            if (err) {
-                throw err;
-            }
-
-            cb(result);
+    update: function(table, objColVals, condition, cb) {
+        connection.query("UPDATE ?? SET ? WHERE ?;", [table, objColVals, condition], function(err, result) {
+          if (err) {
+            throw err;
+          }
+    
+          cb(result);
         });
     } 
 };
