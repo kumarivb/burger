@@ -6,7 +6,7 @@
         <div>
             <div class="row">
                 {{#each data}}
-                {{#unless this.devoured}}
+                    {{#unless this.devoured}}
             </div>
         </div>
         <div>
@@ -25,6 +25,29 @@
             </div>
         </div>
         {{/unless}}
-        {{/each}}
+            {{/each}}
+
+        <div>
+            <div class="row">
+                {{#each data}}
+                    {{!-- if this is true --}}
+                    {{#if this.devoured}}
+                        <input class="form-control" type="text" placeholder="{{this.id}}. {{this.burgerName}}" readonly>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <p>What kind of burger you would like to eat?</p>
+            <form method="POST" action="/">
+                <input type="text" name="burgerName" class="form-control" id="userInput">
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
     </div>
 </div>
