@@ -1,50 +1,59 @@
 <div class="container">
-    <div class="row">
-        <div class="text-center">
-            eat
-        </div>
-        <div>
-            <div class="row">
-                {{#each data}}
-                    {{#unless this.devoured}}
-            </div>
-        </div>
-        <div>
-            <div class="row">
-                {{this.id}}. {{this.burgerName}}
-            </div>
-        </div>
-        <div>
-            <div class="row">
-                <form method="POST" action="/{{this.id}}?_method=PUT">
-                    <input type="hidden" type="text" name="burgerId" value={{this.id}}>
-                    <button type="submit">
-                        Devour it!
-                    </button>
-                </form>
-            </div>
-        </div>
-        {{/unless}}
-            {{/each}}
+    <div class="header">
+        <h1 class="display-4"><img src="/assets/images/header.jpg"></h1>
+    </div>
+</div>
 
-        <div>
-            <div class="row">
-                {{#each data}}
-                    {{!-- if this is true --}}
-                    {{#if this.devoured}}
-                        <input class="form-control" type="text" placeholder="{{this.id}}. {{this.burgerName}}" readonly>
-                    {{/if}}
+<div class="row mainC">
+    <div class="col-sm-6">
+        <div class="card border-0">
+            <div class="card-body">
+                <h5 class="card-title">Which burger would you like to eat?</h5>
+                {{#each data}} 
+                {{#unless this.devoured}}
+                
+                <h class="title">
+                    {{this.id}}. {{this.burgerName}}
+                </h>
+                <p class="card-text">
+                    <form method="POST" action="/{{this.id}}?_method=PUT">
+                        <input type="hidden" type="text" name="burgerId" value={{this.id}}>
+                        <button type="submit">
+                            Devour it!
+                        </button>
+                    </form>
+                </p>
+                
+                {{/unless}}
                 {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card border-0">
+            <div class="card-body">
+                <h5 class="card-title">Yum Yum!</h5>
+                <p class="card-text">    
+                    {{#each data}}
+                        {{!-- if this is true --}}
+                        {{#if this.devoured}}
+                    <p>
+                        {{this.id}}. {{this.burgerName}}
+                    </p>
+                        {{/if}}
+                    {{/each}}
+                </p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div>
-            <p>What kind of burger you would like to eat?</p>
-            <form method="POST" action="/">
+<div class="row justify-content-start text-center uInput">
+    <div class="card w-50 border-0">
+        <div class="card-body">
+            <h5 class="card-title">What kind of burger you would like to eat?</h5>
+            <form method="POST" action="/" class="list1">
                 <input type="text" name="burgerName" class="form-control" id="userInput">
                 <button type="submit">SUBMIT</button>
             </form>
